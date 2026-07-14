@@ -22,22 +22,62 @@ def iniciar_menu():
             match usuario_logueado["tipo"]:
                 case "Cliente":
                     iniciar_menu_cliente(usuario_logueado)
-                # case "Restaurante":
-                # iniciar_menu_restaurante(usuario_logueado)  #Inicia Menu del Rol Restaurante
-                # case "Administrador":
-                # iniciar_menu_admin(usuario_logueado)        #Inicia Menu del Rol administrador
+                case "Restaurante":
+                    iniciar_menu_restaurante(usuario_logueado)  #Inicia Menu del Rol Restaurante
+                case "Administrador":
+                    iniciar_menu_admin(usuario_logueado)        #Inicia Menu del Rol administrador
 
 def iniciar_menu_cliente(cliente:dict) -> None:
+    """Menú del rol Cliente"""
     while True:
         mostrar_menu_cliente()
-        eleccion = elegir_menu(3)
+        eleccion = elegir_menu(4)
         match eleccion:
             case 1:
                 ver_datos(cliente)
             case 2:
                 realizar_pedido(cliente)
             case 3:    
-                print("Saliendo del sistema...")
+                print("Saliendo...")
                 break
                     
         input("\nPresione Enter para continuar...")
+
+    
+def iniciar_menu_restaurante(restaurante: dict) -> None:
+    while True:
+        mostrar_menu_restaurante()
+        eleccion = elegir_menu(5)
+
+        match eleccion:
+            case 1:
+                ver_datos(restaurante)
+            case 2:
+                #preparar_pedido()
+            case 3:
+                #entregar_pedido()
+            case 4:
+                #ver_facturacion_restaurante(restaurante)
+            
+            case 5:    
+                print("Saliendo...")
+                break
+
+        input("\nPresione Enter para continuar...")
+
+def iniciar_menu_admin(admin: dict) -> None:
+    """Menú del rol Administrador"""
+    while True:
+        mostrar_menu_administrador()
+        eleccion = elegir_menu(4)
+
+        match eleccion:
+            case 1:
+                #crear_usuario_admin()
+            case 2:
+                #borrar_usuario_admin()
+            case 3:
+                #ver_info_sistema()
+            case 4:
+                print("Saliendo...")
+                break
