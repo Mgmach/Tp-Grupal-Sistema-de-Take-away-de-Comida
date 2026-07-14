@@ -64,32 +64,6 @@ def mostrar_menu_bebidas(bebidas:dict) -> None:
     for clave, producto in bebidas.items():
         print(f"{clave}. {producto['nombre']} - ${producto['precio']}")
 
-def mostrar_menu_restaurante() -> None:
-    """Muestra el menu principal con todas las opciones disponibles.
-    """
-    print("=" * 60)
-    print("=== Bienvenido al sistema de delivery UTN Eats ===")
-    print("Pide desde la comodidad de tu casa")
-    print("Este sistema te permite realizar pedidos de comida entre clientes y restaurantes.")
-    print(" " * 15 + "Seleccione una opcion:")
-    print("=" * 60)
-    print(" Iniciar Sesión")
-    print("=" * 60)
-
-def mostrar_menu_administrador() -> None:
-    """Muestra el menu principal con todas las opciones disponibles.
-    """
-    print("=" * 60)
-    print("=== Bienvenido al sistema de delivery UTN Eats ===")
-    print("Pide desde la comodidad de tu casa")
-    print("Este sistema te permite realizar pedidos de comida entre clientes y restaurantes.")
-    print(" " * 15 + "Seleccione una opcion:")
-    print("=" * 60)
-    print(" Iniciar Sesión")
-    print("=" * 60)
-
-
-
 
 def obtener_texto_estado(estado: int) -> str:
     """
