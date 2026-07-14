@@ -24,6 +24,27 @@ def mostrar_menu_cliente() -> None:
     print("2) Realizar pedido (Simulado)")
     print("3) Salir")
     print("=" * 60)
+    
+def mostrar_menu_restaurante() -> None:
+    print("=" * 60)
+    print("MENU RESTAURANTE")
+    print("=" * 60)
+    print("1) Ver datos")
+    print("2) Preparar pedido")
+    print("3) Entregar pedido")
+    print("4) Ver facturacion")
+    print("5) Salir")
+    print("=" * 60)
+
+def mostrar_menu_administrador() -> None:
+    print("=" * 60)
+    print("MENU ADMINISTRADOR")
+    print("=" * 60)
+    print("1) Crear usuario")
+    print("2) Borrar usuario")
+    print("3) Ver informacion del sistema")
+    print("4) Salir")
+    print("=" * 60)
 
 def ver_datos(usuario:dict) -> None:
     """Muestra todos los datos del usuario, excepto la contraseña."""
