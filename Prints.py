@@ -126,3 +126,17 @@ def imprimir_pedido(pedido: dict) -> None:
     print(f"Total            : ${pedido['total']}")
     print(f"Estado           : {obtener_texto_estado(pedido['estado'])}")
     print("-" * 40)
+
+
+
+def imprimir_matriz_pedidos(matriz: list) -> None:
+    """
+    Muestra la matriz de pedidos en formato tabla
+ 
+    Args:
+        matriz (list): Matriz con filas
+    """
+    print("\nNro pedido          | Total      | Estado")
+    print("-" * 50)
+    for i in range(len(matriz)):
+        print(f"  {matriz[i][0]}  |  ${matriz[i][1]}  |  {obtener_texto_estado(matriz[i][2])}") 
