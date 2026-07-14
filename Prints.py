@@ -66,3 +66,68 @@ def mostrar_menu_administrador() -> None:
     print("=" * 60)
     print(" Iniciar Sesión")
     print("=" * 60)
+
+
+
+
+def obtener_texto_estado(estado: int) -> str:
+    """
+    Muestra el estado de un pedido a un texto legible para
+    mostrar en pantalla
+ 
+    Args:
+        estado (int): Estado del pedido
+ 
+    Returns:
+        str: "Pendiente", "En preparación" o "Entregado"
+    """
+    if estado == 1:
+        texto = "Pendiente"
+    elif estado == 2:
+        texto = "En preparación"
+    else:
+        texto = "Entregado"
+ 
+    return texto
+
+
+
+def imprimir_ticket_pedido(items_pedido: list, total: float) -> None:
+    """
+    Muestra el ticket de los productos elegidos junto con el
+    total antes de que se confirme el pedido
+ 
+    Args:
+        items_pedido (list): Lista de diccionarios con los productos
+            elegidos
+        total (float): Total calculado del pedido
+ 
+    Returns:
+        None
+    """
+    print("\n----- RESUMEN DEL PEDIDO -----")
+    for i in range(len(items_pedido)):
+        item = items_pedido[i]
+        subtotal = item["precio"] * item["cantidad"]
+        print(f"{item['cantidad']} x {item['nombre']} - ${subtotal}")
+    print("-" * 30)
+    print(f"TOTAL: ${total}")
+
+
+
+def imprimir_pedido(pedido: dict) -> None:
+    """
+    Muestra los datos de un pedido puntual
+ 
+    Args:
+        pedido (dict): Diccionario con los datos del pedido
+ 
+    Returns:
+        None
+    """
+    print("-" * 40)
+    print(f"Número de pedido : {pedido['numero']}")
+    print(f"Restaurante      : {pedido['restaurante']}")
+    print(f"Total            : ${pedido['total']}")
+    print(f"Estado           : {obtener_texto_estado(pedido['estado'])}")
+    print("-" * 40)
