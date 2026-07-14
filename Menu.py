@@ -2,52 +2,42 @@ from Input import *
 from Funciones import *
 from Prints import *
 
-def elegir_menu() -> int:
+def elegir_menu(max:int) -> int:
     """Solicita al usuario que elija una opcion del menu y la valida.
     """
     num = ingresar_entero_rango(
         "Elija una opcion: ",
         "Error, debe elegir una opcion valida",
-        maximo=6
+        maximo = max
     )
     return num
 
-def iniciar_menu() -> None:
-    """Inicia el loop principal del menu, controla el flujo del programa
-    y llama a las funciones correspondientes segun la opcion elegida.
-    Impide el acceso a opciones que requieren datos cargados previamente.
-    """    
-    lista_alumnos = []
-    datos_cargados = False
-    es_manual = False
-
+def iniciar_menu():
     while True:
         mostrar_menu_inicio()
-        eleccion = elegir_menu()
-
-        if eleccion == 13:
-            print("Saliendo del sistema...")
-            break
-
-        if eleccion != 1 and not datos_cargados:
-            print("Primero debe cargar los datos de los alumnos.")
+        usuario_logueado = iniciar_sesion()
+        if usuario_logueado is None:
+            print("Usuario o contraseña incorrectos.")
         else:
-            match eleccion:
-                case 1:
-                    lista_alumnos, es_manual = elejir_carga(lista_alumnos)
-                    datos_cargados = True
-                case 2:
-                    imprimir_lista_alumnos(buscar_por_plan(lista_alumnos))
-                case 3:
-                    imprimir_lista_alumnos(buscar_egresados_anteriores_a(lista_alumnos, 2000))
-                case 4:
-                    imprimir_lista_alumnos(buscar_por_nombre_apellido(lista_alumnos))
-                case 5:
-                    imprimir_lista_alumnos(buscar_mejores_promedios(lista_alumnos))
-                case 6:
-                    guardar_json("alumnos.json", lista_alumnos)
-                    print("Datos guardados correctamente.")
-                    print("Saliendo del sistema...")
-                    break
+            match usuario_logueado["tipo"]:
+                case "Cliente":
+                    iniciar_menu_cliente(usuario_logueado)
+                # case "Restaurante":
+                # iniciar_menu_restaurante(usuario_logueado)  #Inicia Menu del Rol Restaurante
+                # case "Administrador":
+                # iniciar_menu_admin(usuario_logueado)        #Inicia Menu del Rol administrador
+
+def iniciar_menu_cliente(cliente:dict) -> None:
+    while True:
+        mostrar_menu_cliente()
+        eleccion = elegir_menu(3)
+        match eleccion:
+            case 1:
+                ver_datos(cliente)
+            case 2:
+                realizar_pedido(cliente)
+            case 3:    
+                print("Saliendo del sistema...")
+                break
                     
         input("\nPresione Enter para continuar...")

@@ -5,38 +5,64 @@ def mostrar_menu_inicio() -> None:
     """Muestra el menu principal con todas las opciones disponibles.
     """
     print("=" * 60)
+    print("=== Bienvenido al sistema de delivery UTN Eats ===")
+    print("Pide desde la comodidad de tu casa")
+    print("Este sistema te permite realizar pedidos de comida entre clientes y restaurantes.")
     print(" " * 15 + "Seleccione una opcion:")
     print("=" * 60)
-    print(" 1) Cargar datos de alumnos.")
-    print(" 2) Mostrar egresados por plan.")
-    print(" 3) Mostrar egresados anteriores al año 2000")
-    print(" 4) Buscar alumno por nombre o apellido")
-    print(" 5) Salón de la fama: alumnos con promedio mayor o igual a 9")
-    print(" 6) Salir del sistema.")
+    print("1) Iniciar Sesión")
+    print("2) Salir")
     print("=" * 60)
 
-def imprimir_alumno(alumno:list) -> None:
-    """Muestra los datos de un alumno.
-    Args:
-        lista_alumnos (list): lista de alumnos a mostrar.
+def mostrar_menu_cliente() -> None:
+    """Muestra el menu principal con todas las opciones disponibles.
     """
-    print("-" * 45)
-    print(f"  Legajo     : {alumno['legajo']}")
-    print(f"  Nombre     : {alumno['nombre']} {alumno['apellido']}")
-    print(f"  Año egreso : {alumno['egreso']}")
-    print(f"  Plan       : {alumno['plan']}")
-    print(f"  Promedio   : {alumno['nota_promedio']}")
-    print("-" * 45)
+    print("=" * 60)
+    print(" " * 15 + "Seleccione una opcion:")
+    print("=" * 60)
+    print("1) Ver datos")
+    print("2) Realizar pedido (Simulado)")
+    print("3) Salir")
+    print("=" * 60)
 
-def imprimir_lista_alumnos(lista_alumnos:list, mensaje:str = "No hay alumnos para mostrar.") -> None:
-    """Muestra todos los alumnos de una lista, uno por uno, reutilizando imprimir_alumno(). Si la lista está vacía, avisa.
-    Args:
-        lista_alumnos (list): lista de alumnos a mostrar.
+def ver_datos(usuario:dict) -> None:
+    """Muestra todos los datos del usuario, excepto la contraseña."""
+    for clave, valor in usuario.items():
+        if clave != "contrasena":
+            print(f"{clave}: {valor}")
+
+def mostrar_menu_comidas(comidas:dict) -> None:
+    """Muestra las opciones de comida disponibles."""
+    print("=== Menú de Comidas ===")
+    for clave, producto in comidas.items():
+        print(f"{clave}. {producto['nombre']} - ${producto['precio']}")
+
+def mostrar_menu_bebidas(bebidas:dict) -> None:
+    """Muestra las opciones de bebida disponibles."""
+    print("=== Menú de Bebidas ===")
+    for clave, producto in bebidas.items():
+        print(f"{clave}. {producto['nombre']} - ${producto['precio']}")
+
+def mostrar_menu_restaurante() -> None:
+    """Muestra el menu principal con todas las opciones disponibles.
     """
-    if len(lista_alumnos) == 0:
-        print(mensaje)
-    else:
-        print(f"\n  Total de alumnos: {len(lista_alumnos)}\n")
-        for i in range(len(lista_alumnos)):
-            imprimir_alumno(lista_alumnos[i])
-          
+    print("=" * 60)
+    print("=== Bienvenido al sistema de delivery UTN Eats ===")
+    print("Pide desde la comodidad de tu casa")
+    print("Este sistema te permite realizar pedidos de comida entre clientes y restaurantes.")
+    print(" " * 15 + "Seleccione una opcion:")
+    print("=" * 60)
+    print(" Iniciar Sesión")
+    print("=" * 60)
+
+def mostrar_menu_administrador() -> None:
+    """Muestra el menu principal con todas las opciones disponibles.
+    """
+    print("=" * 60)
+    print("=== Bienvenido al sistema de delivery UTN Eats ===")
+    print("Pide desde la comodidad de tu casa")
+    print("Este sistema te permite realizar pedidos de comida entre clientes y restaurantes.")
+    print(" " * 15 + "Seleccione una opcion:")
+    print("=" * 60)
+    print(" Iniciar Sesión")
+    print("=" * 60)

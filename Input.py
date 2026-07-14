@@ -35,7 +35,7 @@ def ingresar_entero(mensaje:str, mensaje_error:str="Error, Debe ingresar un nume
 
     return numero_entero
 
-def ingresar_entero_rango(mensaje:str, mensaje_error:str, minimo:int=0, maximo:int=10000) -> int:
+def ingresar_entero_rango(mensaje:str, mensaje_error:str, maximo:int, minimo:int=0) -> int:
     """Solicita al usuario un número entero dentro de un rango y lo valida.
     Args:
         mensaje (str): mensaje a mostrar al usuario.
@@ -46,7 +46,7 @@ def ingresar_entero_rango(mensaje:str, mensaje_error:str, minimo:int=0, maximo:i
         int: número entero ingresado por el usuario dentro del rango.
     """
     numero_entero = ingresar_entero(mensaje)
-    while numero_entero < minimo or numero_entero > maximo:
+    while numero_entero <= minimo or numero_entero >= maximo:
         print(mensaje_error)
         numero_entero = ingresar_entero(mensaje)
 
@@ -110,7 +110,7 @@ def ingresar_flotante_rango(mensaje:str, mensaje_error:str, minimo:int, maximo:i
         float: número flotante ingresado por el usuario dentro del rango.
     """
     numero = ingresar_flotante(mensaje)
-    while numero < minimo or numero > maximo:
+    while numero <= minimo or numero > maximo:
         print(mensaje_error)
         numero = ingresar_flotante(mensaje)
     return numero
@@ -139,14 +139,14 @@ def es_letra(caracter:str) -> bool:
     codigo = ord(caracter)
     return (65 <= codigo <= 90) or (97 <= codigo <= 122) or codigo == 32
 
-def es_nombre_valido(cadena:str) -> bool:
-    """Valida que la cadena tenga al menos 3 caracteres y sean solo letras/espacios.
+def es_nombre_valido(cadena:str, minimo:int) -> bool:
+    """Valida que la cadena tenga al menos un minimo de caracteres y sean solo letras/espacios.
     Args:
         cadena (str): cadena a validar.
     Returns:
         bool: True si la cadena es un nombre válido, False en caso contrario.
     """
-    valido = len(cadena) >= 3
+    valido = len(cadena) >= minimo
     if valido:
         for i in range(len(cadena)):
             if not es_letra(cadena[i]):
@@ -154,9 +154,9 @@ def es_nombre_valido(cadena:str) -> bool:
                 break
     return valido
 
-def pedir_nombre_apellido(mensaje:str) -> str:
+def pedir_nombre(mensaje:str, minimo:int) -> str:
     """Solicita al usuario un nombre o apellido y lo valida
-    (mínimo 3 caracteres, solo letras y espacios).
+    (mínimo caracteres, solo letras y espacios).
     Args:
         mensaje (str): mensaje a mostrar al usuario.
     Returns:
@@ -164,61 +164,32 @@ def pedir_nombre_apellido(mensaje:str) -> str:
     """
     dato = ingresar_cadena(mensaje)
     while not es_nombre_valido(dato):
-        print("  Error: debe ingresar al menos 3 letras, sin números ni símbolos.")
+        print(f"  Error: debe ingresar al menos {minimo} letras, sin números ni símbolos.")
         dato = ingresar_cadena(mensaje)
     return dato
 
-def pedir_año_egreso() -> int:
-    """Solicita al usuario el año de egreso y lo valida (entre 1991 y 2026).
-    Returns:
-        int: año de egreso ingresado por el usuario.
-    """
-    return ingresar_entero_rango(
-        "Ingrese año de egreso (1991-2026): ",
-        "  Error: el año debe estar entre 1991 y 2026.",
-        1991, 2026
-    )
+def pedir_contraseña(mensaje:str) -> str:
+    cadena = ingresar_cadena(mensaje)
+    if len(cadena) <= 8:
+        print("Error, la contraseña debe ser mayor a 8 caracteres.")
+        cadena = ingresar_cadena(mensaje)
+    return cadena
 
-def pedir_plan() -> int:
-    """Solicita al usuario el plan de estudios y lo valida (solo 1991, 2003 o 2024).
-    Returns:
-        int: plan de estudios ingresado por el usuario.
-    """
-    planes_validos = [1991, 2003, 2024]
-    plan = ingresar_entero_rango(
-        "Ingrese plan (1991/2003/2024): ",
-        "  Error: el plan debe ser 1991, 2003 o 2024.",
-        1991, 2024
-    )
-    while plan not in planes_validos:
-        print("  Error: el plan debe ser 1991, 2003 o 2024.")
-        plan = ingresar_entero_rango(
-            "Ingrese plan (1991/2003/2024): ",
-            "  Error: el plan debe ser 1991, 2003 o 2024.",
-            1991, 2024
-        )
-    return plan
+def pedir_tipo_usuario(mensaje:str, nuevo_usuario:bool) ->str:
+    while True:
+        print(mensaje)
+        print("1. Cliente")
+        print("2. Restaurante")
+        if not nuevo_usuario:
+            print("3. Administrador")
+        opcion = input("Ingrese una opción (Numero): ")
 
-def a_minuscula(caracter:str) -> str:
-    """Convierte un carácter mayúscula a minúscula usando código ASCII.
-    Args:
-        caracter (str): carácter a convertir.
-    Returns:
-        str: carácter en minúscula.
-    """
-    codigo = ord(caracter)
-    if 65 <= codigo <= 90:  # A-Z
-        return chr(codigo + 32)
-    return caracter
-
-def cadena_a_minuscula(cadena:str) -> str:
-    """Convierte toda una cadena a minúsculas carácter por carácter.
-    Args:
-        cadena (str): cadena a convertir.
-    Returns:
-        str: cadena convertida a minúsculas.
-    """
-    resultado = ""
-    for i in range(len(cadena)):
-        resultado = resultado + a_minuscula(cadena[i])
-    return resultado
+        match opcion:
+            case 1:
+                return "Cliente"
+            case 2:
+                return "Restaurante"
+            case 3:
+                return "Administrador"
+            case _:
+                print("Opción inválida. Intente nuevamente.\n")
