@@ -53,11 +53,11 @@ def iniciar_menu_restaurante(restaurante: dict) -> None:
             case 1:
                 ver_datos(restaurante)
             case 2:
-                #preparar_pedido()
+                preparar_pedido()
             case 3:
-                #entregar_pedido()
+                # entregar pedido
             case 4:
-                #ver_facturacion_restaurante(restaurante)
+                # ver la facturacion del restaurante
             
             case 5:    
                 print("Saliendo...")
@@ -73,11 +73,11 @@ def iniciar_menu_admin(admin: dict) -> None:
 
         match eleccion:
             case 1:
-                #crear_usuario_admin()
+                # crear usuario 
             case 2:
-                #borrar_usuario_admin()
+                # borrar usuario 
             case 3:
-                #ver_info_sistema()
+                # ver la info de sistema
             case 4:
                 print("Saliendo...")
                 break
