@@ -31,7 +31,7 @@ def iniciar_menu_cliente(cliente:dict) -> None:
     """Menú del rol Cliente"""
     while True:
         mostrar_menu_cliente()
-        eleccion = elegir_menu(4)
+        eleccion = elegir_menu(3)
         match eleccion:
             case 1:
                 ver_datos(cliente)
@@ -58,7 +58,6 @@ def iniciar_menu_restaurante(restaurante: dict) -> None:
                 # entregar pedido
             case 4:
                 # ver la facturacion del restaurante
-            
             case 5:    
                 print("Saliendo...")
                 break
