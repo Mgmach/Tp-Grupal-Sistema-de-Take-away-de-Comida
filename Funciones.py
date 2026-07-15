@@ -4,6 +4,7 @@ from Usuarios import *
 from Productos import *
 import json
 import os
+import random
 
 def agregar_elemento(elemento:any, lista:list) -> list:
     """Agrega un elemento al final de una lista (equivalente a append).
@@ -24,6 +25,15 @@ def iniciar_sesion():
         if u["usuario"] == usuario_ingresado and u["contrasena"] == contrasena_ingresada:
             return u
     return None
+
+def preparar_pedido() -> None:
+    """
+    Simula la preparación de un pedido generando un número
+    aleatorio de exactamente 13 cifras
+    """
+    numero = random.randint(1000000000000, 9999999999999)
+    print(f"\n  Pedido en preparacion.")
+    print(f"  Numero de pedido: {numero}")
 
 def realizar_pedido():
     restaurante = pedir_nombre("Ingresar Restaurante; ", 3)
