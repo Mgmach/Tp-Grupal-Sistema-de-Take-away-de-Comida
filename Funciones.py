@@ -2,6 +2,8 @@ from Input import *
 from Prints import *
 from Usuarios import *
 from Productos import *
+import json
+import os
 
 def agregar_elemento(elemento:any, lista:list) -> list:
     """Agrega un elemento al final de una lista (equivalente a append).
@@ -187,5 +189,27 @@ def obtener_pedidos_a_matriz(pedidos: list) -> list:
         matriz.append(fila)
  
     return matriz
- 
 
+
+
+def cargar_pedidos(ruta: str) -> list:
+    """
+    Lee la lista de pedidos desde un archivo JSON
+ 
+    Args:
+        ruta (str): Ruta del archivo JSON
+ 
+    Returns:
+        list: Lista de pedidos
+        Lista vacía si el archivo no existe
+    """
+    pedidos = []
+ 
+    if os.path.exists(ruta):
+        with open(ruta, "r", encoding="utf-8") as archivo:
+            pedidos = json.load(archivo)
+    else:
+        print(f"No se encontró el archivo {ruta}")
+ 
+    return pedidos
+ 
